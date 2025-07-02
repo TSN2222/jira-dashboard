@@ -50,8 +50,8 @@ This project demonstrates proficiency in full-stack development, containerizatio
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │                 │    │                  │    │                 │
-│   React Frontend│◄──►│  Express Backend │◄──►│   Jira Server   │
-│   (Port 3000)   │    │   (Port 3001)    │    │   REST API      │
+│ React Frontend  │◄──►│  Express Backend │◄──►│   Jira Server   │
+│  (Port 3000)    │    │    (Port 3001)   │    │    REST API     │
 │                 │    │                  │    │                 │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
          │                        │
@@ -59,8 +59,8 @@ This project demonstrates proficiency in full-stack development, containerizatio
                   │
          ┌─────────▼──────────┐
          │                    │
-         │  Nginx Reverse     │
-         │  Proxy (Port 80)   │
+         │    Nginx Reverse   │
+         │   Proxy (Port 80)  │
          │                    │
          └────────────────────┘
 ```
