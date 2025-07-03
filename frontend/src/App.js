@@ -55,25 +55,33 @@ function App() {
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      <table className='issues-table'>
-        {issues.map((issue) => (
-          <tr>
-            <td>
-              <a
-                href={`${baseURL}/browse/${issue.key}`}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <strong>{issue.key}</strong>
-              </a>
-            </td>
-            <td>{issue.fields.summary}</td>
-            <td>
-              <em>{issue.fields.status.name}</em>
-            </td>
-          </tr>
-        ))}
-      </table>
+      {issues.length > 0 ? (
+        <table className='issues-table'>
+          {issues.map((issue) => (
+            <tr key={issue.key}>
+              <td>
+                <a
+                  href={`${baseURL}/browse/${issue.key}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <strong>{issue.key}</strong>
+                </a>
+              </td>
+              <td>{issue.fields.summary}</td>
+              <td>
+                <em>{issue.fields.status.name}</em>
+              </td>
+            </tr>
+          ))}
+        </table>
+      ) : (
+        !loading && (
+          <p>
+            <em>No Tickets Found</em>
+          </p>
+        )
+      )}
     </div>
   );
 }
