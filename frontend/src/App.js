@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   const [issues, setIssues] = useState([]);
-  const [username, setUsername] = useState('nicholas.daniel@oakland.k12.mi.us');
+  const [username, setUsername] = useState('@oakland.k12.mi.us');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [baseURL, setBaseURL] = useState('');
@@ -39,7 +39,15 @@ function App() {
           type='text'
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder='Enter Jira username'
+          className='username-input'
+          placeholder='Enter Jira Username'
+          style={{
+            width: `${Math.max(
+              (username || 'Enter Jira Username' || '@oakland.k12.mi.us')
+                .length,
+              10
+            )}ch`,
+          }}
         />
         <button onClick={fetchIssues}>Fetch Issues</button>
       </div>
