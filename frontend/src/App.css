@@ -3,7 +3,8 @@
 }
 
 .username-input,
-button {
+button,
+.filter-dropdown {
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -15,9 +16,11 @@ button {
   margin: 0 0 0 10px;
   color: black;
   background-color: white;
+  cursor: pointer;
 }
 
-button:hover {
+button:hover,
+.filter-dropdown:hover {
   color: white;
   border: 1px solid #009746;
   background-color: #009746;
@@ -38,6 +41,20 @@ button:hover {
 }
 
 .issues-table td {
-  padding: 8px 12px; /* Additional padding inside cells */
-  border: 1px solid #ddd; /* Optional: borders around each cell */
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+}
+
+.filter-container {
+  margin: 20px 0;
+}
+
+.filter-dropdown {
+  font-size: 30px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.filter-dropdown:focus {
+  outline: none;
 }
