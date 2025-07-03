@@ -13,13 +13,32 @@ app.get('/api/issues', async (req, res) => {
   const JIRA_BASE_URL = process.env.JIRA_BASE_URL;
   const JIRA_PAT = process.env.JIRA_PAT;
   const username = req.query.username;
+  const filter = req.query.filter;
+
+  let jql = `assignee = "${username}" `;
+
+  switch (filter) {
+    case 'open-tickets':
+      jql += 'AND status NOT IN (Resolved, Done, Cancelled)';
+      break;
+    case 'recently-closed':
+      jql += 'AND resolutiondate >= -5d';
+      break;
+    case 'sla-breached':
+      jql +=
+        'AND status NOT IN (Resolved, Done, Cancelled) AND ("Time to first response" = breached() OR "Time to resolution" = breached())';
+      break;
+    default:
+  }
+
+  jql += ' ORDER BY created DESC';
 
   try {
     const response = await axios.get(`${JIRA_BASE_URL}/rest/api/2/search`, {
       params: {
-        jql: `assignee = "${username}" AND status NOT IN (Resolved, Done, Cancelled) AND ("Time to first response" = breached() OR "Time to resolution" = breached()) ORDER BY created DESC`,
+        jql: jql,
         fields: 'summary,status',
-        maxResults: 20,
+        maxResults: 40,
       },
       headers: {
         Authorization: `Bearer ${JIRA_PAT}`,

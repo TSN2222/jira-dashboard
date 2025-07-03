@@ -7,13 +7,14 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [baseURL, setBaseURL] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState('open-tickets');
 
   const fetchIssues = async () => {
     setLoading(true);
     setError(null);
     try {
       const response = await fetch(
-        `http://localhost:3001/api/issues?username=${username}`
+        `http://localhost:3001/api/issues?username=${username}&filter=${selectedFilter}`
       );
       if (!response.ok) throw new Error('Failed to fetch issues');
       const data = await response.json();
@@ -27,12 +28,24 @@ function App() {
   };
 
   useEffect(() => {
-    fetchIssues();
-  }, []);
+    if (username) {
+      fetchIssues();
+    }
+  }, [selectedFilter]);
 
   return (
     <div className='App'>
-      <h1>Jira Issue Dashboard</h1>
+      <div className='filter-container'>
+        <select
+          value={selectedFilter}
+          onChange={(e) => setSelectedFilter(e.target.value)}
+          className='filter-dropdown'
+        >
+          <option value='open-tickets'>Open Tickets</option>
+          <option value='recently-closed'>Recently Closed</option>
+          <option value='sla-breached'>SLA Breached</option>
+        </select>
+      </div>
 
       <div>
         <input
