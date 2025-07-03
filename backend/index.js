@@ -17,7 +17,7 @@ app.get('/api/issues', async (req, res) => {
   try {
     const response = await axios.get(`${JIRA_BASE_URL}/rest/api/2/search`, {
       params: {
-        jql: `assignee="${username}" ORDER BY updated DESC`,
+        jql: `assignee = "${username}" AND status NOT IN (Resolved, Done, Cancelled) AND ("Time to first response" = breached() OR "Time to resolution" = breached()) ORDER BY created DESC`,
         fields: 'summary,status',
         maxResults: 20,
       },
