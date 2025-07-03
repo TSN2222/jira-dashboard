@@ -55,20 +55,25 @@ function App() {
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      <ul>
+      <table className='issues-table'>
         {issues.map((issue) => (
-          <li key={issue.key}>
-            <a
-              href={`${baseURL}/browse/${issue.key}`}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <strong>{issue.key}</strong>
-            </a>
-            : {issue.fields.summary} — <em>{issue.fields.status.name}</em>
-          </li>
+          <tr>
+            <td>
+              <a
+                href={`${baseURL}/browse/${issue.key}`}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <strong>{issue.key}</strong>
+              </a>
+            </td>
+            <td>{issue.fields.summary}</td>
+            <td>
+              <em>{issue.fields.status.name}</em>
+            </td>
+          </tr>
         ))}
-      </ul>
+      </table>
     </div>
   );
 }
