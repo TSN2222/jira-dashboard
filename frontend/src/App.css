@@ -6,11 +6,25 @@ h1 {
   margin: 20px;
 }
 
-.username-input {
+.username-input,
+button {
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-family: monospace; /* Makes ch units more accurate */
+}
+
+button {
+  margin: 0 0 0 10px;
+  color: black;
+  background-color: white;
+  border: 1px solid #008cba;
+  transition-duration: 0.3s;
+}
+
+button:hover {
+  color: white;
+  background-color: #008cba;
 }
 
 .issues-table {

@@ -49,7 +49,7 @@ function App() {
             )}ch`,
           }}
         />
-        <button onClick={fetchIssues}>Fetch Issues</button>
+        <button onClick={fetchIssues}>Fetch Tickets</button>
       </div>
 
       {loading && <p>Loading...</p>}
