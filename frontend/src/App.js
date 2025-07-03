@@ -6,6 +6,7 @@ function App() {
   const [username, setUsername] = useState('nicholas.daniel@oakland.k12.mi.us');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [baseURL, setBaseURL] = useState('');
 
   const fetchIssues = async () => {
     setLoading(true);
@@ -17,6 +18,7 @@ function App() {
       if (!response.ok) throw new Error('Failed to fetch issues');
       const data = await response.json();
       setIssues(data.issues || data);
+      setBaseURL(data.baseURL);
     } catch (err) {
       setError(err.message || 'Unknown error');
     } finally {
@@ -48,8 +50,14 @@ function App() {
       <ul>
         {issues.map((issue) => (
           <li key={issue.key}>
-            <strong>{issue.key}</strong>: {issue.fields.summary} —{' '}
-            <em>{issue.fields.status.name}</em>
+            <a
+              href={`${baseURL}/browse/${issue.key}`}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <strong>{issue.key}</strong>
+            </a>
+            : {issue.fields.summary} — <em>{issue.fields.status.name}</em>
           </li>
         ))}
       </ul>

@@ -26,7 +26,10 @@ app.get('/api/issues', async (req, res) => {
       },
     });
 
-    res.json(response.data);
+    res.json({
+      issues: response.data.issues,
+      baseURL: process.env.JIRA_BASE_URL,
+    });
   } catch (error) {
     console.error(
       'Error fetching issues:',
