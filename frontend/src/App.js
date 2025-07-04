@@ -105,6 +105,21 @@ function App() {
               </td>
               <td>{issue.fields.summary}</td>
               <td>
+                <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigator.clipboard.writeText(
+                      issue.fields.reporter.emailAddress
+                    );
+                  }}
+                  title='Click To Copy Email'
+                  className='copy-email'
+                >
+                  {issue.fields.reporter.displayName}
+                </a>
+              </td>
+
+              <td>
                 <em>{issue.fields.status.name}</em>
               </td>
             </tr>

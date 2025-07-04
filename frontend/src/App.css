@@ -99,6 +99,16 @@ button:hover {
   z-index: 999; /* just below the dropdown */
 }
 
+.copy-email {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.copy-email:hover {
+  color: white;
+  background-color: #009746;
+}
+
 @keyframes dropdownFade {
   from {
     opacity: 0;

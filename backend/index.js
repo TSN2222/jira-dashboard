@@ -41,7 +41,7 @@ app.get('/api/issues', async (req, res) => {
     const response = await axios.get(`${JIRA_BASE_URL}/rest/api/2/search`, {
       params: {
         jql: jql,
-        fields: 'summary,status',
+        fields: 'summary,status,reporter',
         maxResults: 40,
       },
       headers: {
