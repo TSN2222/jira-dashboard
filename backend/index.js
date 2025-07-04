@@ -28,6 +28,10 @@ app.get('/api/issues', async (req, res) => {
       jql +=
         'AND status NOT IN (Resolved, Done, Cancelled) AND ("Time to first response" = breached() OR "Time to resolution" = breached())';
       break;
+    case 'needs-update':
+      jql +=
+        'AND status NOT IN (Resolved, Done, Cancelled) AND updatedDate <= startOfDay()';
+      break;
     default:
   }
 

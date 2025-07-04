@@ -14,6 +14,7 @@ function App() {
     'open-tickets': 'Open Tickets',
     'recently-closed': 'Recently Closed',
     'sla-breached': 'SLA Breached',
+    'needs-update': 'Daily Check-in Due',
   };
 
   const fetchIssues = async () => {
@@ -89,7 +90,6 @@ function App() {
         <button onClick={fetchIssues}>Fetch Tickets</button>
       </div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {loading && <p>Loading...</p>}
       {issues.length > 0 ? (
         <table className='issues-table'>
           {issues.map((issue) => (
