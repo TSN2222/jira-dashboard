@@ -2,9 +2,13 @@
   text-align: center;
 }
 
+p {
+  margin: 25px 0 0 0;
+}
+
 .username-input,
-button,
-.filter-dropdown {
+.dropdown-button,
+button {
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -13,21 +17,20 @@ button,
 }
 
 button {
-  margin: 0 0 0 10px;
+  margin: 0 0 0 15px;
   color: black;
   background-color: white;
   cursor: pointer;
 }
 
-button:hover,
-.filter-dropdown:hover {
+button:hover {
   color: white;
   border: 1px solid #009746;
   background-color: #009746;
 }
 
 .username-input:focus {
-  border: 1px solid #009746;
+  border: 1px solid 009746;
   outline: none;
 }
 
@@ -45,16 +48,64 @@ button:hover,
   border: 1px solid #ddd;
 }
 
-.filter-container {
-  margin: 20px 0;
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin: 25px 0;
+  z-index: 1000;
 }
 
-.filter-dropdown {
-  font-size: 30px;
-  background-color: white;
+.dropdown-button {
   cursor: pointer;
+  font-size: 25px;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.4);
 }
 
-.filter-dropdown:focus {
-  outline: none;
+.dropdown-menu {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0 0;
+  width: 100%;
+  animation: dropdownFade 0.3s ease-out;
+}
+
+.dropdown-item {
+  padding: 8px;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+.dropdown-item:hover,
+.dropdown-item.selected {
+  background: #009746;
+  color: white;
+  border-radius: 5px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
+  z-index: 999; /* just below the dropdown */
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

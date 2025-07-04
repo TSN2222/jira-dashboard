@@ -8,6 +8,13 @@ function App() {
   const [error, setError] = useState(null);
   const [baseURL, setBaseURL] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('open-tickets');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const filterLabels = {
+    'open-tickets': 'Open Tickets',
+    'recently-closed': 'Recently Closed',
+    'sla-breached': 'SLA Breached',
+  };
 
   const fetchIssues = async () => {
     setLoading(true);
@@ -35,18 +42,35 @@ function App() {
 
   return (
     <div className='App'>
-      <div className='filter-container'>
-        <select
-          value={selectedFilter}
-          onChange={(e) => setSelectedFilter(e.target.value)}
-          className='filter-dropdown'
+      {dropdownOpen && (
+        <div className='overlay' onClick={() => setDropdownOpen(false)} />
+      )}
+      <div className='dropdown'>
+        <button
+          className='dropdown-button'
+          onClick={() => setDropdownOpen(!dropdownOpen)}
         >
-          <option value='open-tickets'>Open Tickets</option>
-          <option value='recently-closed'>Recently Closed</option>
-          <option value='sla-breached'>SLA Breached</option>
-        </select>
+          ▼ {filterLabels[selectedFilter]} ▼
+        </button>
+        {dropdownOpen && (
+          <ul className='dropdown-menu'>
+            {Object.entries(filterLabels).map(([key, label]) => (
+              <li
+                key={key}
+                className={`dropdown-item ${
+                  key === selectedFilter ? 'selected' : ''
+                }`}
+                onClick={() => {
+                  setSelectedFilter(key);
+                  setDropdownOpen(false);
+                }}
+              >
+                {label}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-
       <div>
         <input
           type='text'
@@ -64,10 +88,8 @@ function App() {
         />
         <button onClick={fetchIssues}>Fetch Tickets</button>
       </div>
-
-      {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-
+      {loading && <p>Loading...</p>}
       {issues.length > 0 ? (
         <table className='issues-table'>
           {issues.map((issue) => (
