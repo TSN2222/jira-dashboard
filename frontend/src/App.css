@@ -105,8 +105,7 @@ button:hover {
 }
 
 .copy-email:hover {
-  color: white;
-  background-color: #009746;
+  color: #009746;
 }
 
 @keyframes dropdownFade {
