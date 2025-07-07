@@ -22,7 +22,7 @@ function App() {
     setError(null);
     try {
       const response = await fetch(
-        `http://localhost:3001/api/issues?username=${username}&filter=${selectedFilter}`
+        `/api/issues?username=${username}&filter=${selectedFilter}`
       );
       if (!response.ok) throw new Error('Failed to fetch issues');
       const data = await response.json();

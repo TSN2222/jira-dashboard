@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: jira-backend
+    env_file:
+      - ./backend/.env
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    ports:
+      - "3001:3001"
+    networks:
+      - jira-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: jira-frontend
+    depends_on:
+      - backend
+    ports:
+      - "0.0.0.0:8080:80"
+    networks:
+      - jira-network
+    restart: unless-stopped
+
+networks:
+  jira-network:
+    driver: bridge
