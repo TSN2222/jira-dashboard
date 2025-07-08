@@ -37,6 +37,7 @@ button:hover {
 .issues-table {
   width: fit-content;
   text-align: left;
+  max-width: calc(100vw - 40px);
   margin: 25px auto 0 auto;
   padding: 10px;
   border-spacing: 15px 10px;

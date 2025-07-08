@@ -92,38 +92,39 @@ function App() {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {issues.length > 0 ? (
         <table className='issues-table'>
-          {issues.map((issue) => (
-            <tr key={issue.key}>
-              <td>
-                <a
-                  href={`${baseURL}/browse/${issue.key}`}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <strong>{issue.key}</strong>
-                </a>
-              </td>
-              <td>{issue.fields.summary}</td>
-              <td>
-                <a
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigator.clipboard.writeText(
-                      issue.fields.reporter.emailAddress
-                    );
-                  }}
-                  title='Click To Copy Email'
-                  className='copy-email'
-                >
-                  {issue.fields.reporter.displayName}
-                </a>
-              </td>
-
-              <td>
-                <em>{issue.fields.status.name}</em>
-              </td>
-            </tr>
-          ))}
+          <tbody>
+            {issues.map((issue) => (
+              <tr key={issue.key}>
+                <td>
+                  <a
+                    href={`${baseURL}/browse/${issue.key}`}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <strong>{issue.key}</strong>
+                  </a>
+                </td>
+                <td>{issue.fields.summary}</td>
+                <td>
+                  <a
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigator.clipboard.writeText(
+                        issue.fields.reporter.emailAddress
+                      );
+                    }}
+                    title='Click To Copy Email'
+                    className='copy-email'
+                  >
+                    {issue.fields.reporter.displayName}
+                  </a>
+                </td>
+                <td>
+                  <em>{issue.fields.status.name}</em>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       ) : (
         !loading && (
