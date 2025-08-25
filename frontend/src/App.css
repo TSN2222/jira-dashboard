@@ -3,10 +3,11 @@
 }
 
 p {
-  margin: 25px 0 0 0;
+  margin: 10px 0 0 0;
 }
 
 .username-input,
+.pat-input,
 .dropdown-button,
 button {
   padding: 8px;
@@ -17,7 +18,7 @@ button {
 }
 
 button {
-  margin: 0 0 0 15px;
+  margin: 10px 0 0 0;
   color: black;
   background-color: white;
   cursor: pointer;
@@ -29,7 +30,8 @@ button:hover {
   background-color: #009746;
 }
 
-.username-input:focus {
+.username-input:focus,
+.pat-input:focus {
   border: 1px solid 009746;
   outline: none;
 }
@@ -52,7 +54,7 @@ button:hover {
 .dropdown {
   position: relative;
   display: inline-block;
-  margin: 25px 0;
+  margin: 25px 0 10px 0;
   z-index: 1000;
 }
 
@@ -107,6 +109,19 @@ button:hover {
 
 .copy-email:hover {
   color: #009746;
+}
+
+.show-pat {
+  position: absolute;
+  transform: translateY(-35%);
+  background: none;
+  border: none;
+}
+
+.show-pat:hover {
+  background: none;
+  border: none;
+  outline: none;
 }
 
 @keyframes dropdownFade {

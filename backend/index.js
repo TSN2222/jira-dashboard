@@ -9,11 +9,16 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
 
-app.get('/api/issues', async (req, res) => {
+app.post('/api/issues', async (req, res) => {
   const JIRA_BASE_URL = process.env.JIRA_BASE_URL;
-  const JIRA_PAT = process.env.JIRA_PAT;
-  const username = req.query.username;
-  const filter = req.query.filter;
+  const { username, filter, pat } = req.body;
+
+  // Validate required fields
+  if (!username || !pat) {
+    return res.status(400).json({
+      error: 'API Key is required',
+    });
+  }
 
   let jql = `assignee = "${username}" `;
 
@@ -45,7 +50,7 @@ app.get('/api/issues', async (req, res) => {
         maxResults: 40,
       },
       headers: {
-        Authorization: `Bearer ${JIRA_PAT}`,
+        Authorization: `Bearer ${pat}`,
         Accept: 'application/json',
       },
     });
@@ -59,7 +64,15 @@ app.get('/api/issues', async (req, res) => {
       'Error fetching issues:',
       error.response?.data || error.message
     );
-    res.status(500).json({ error: 'Failed to fetch issues' });
+
+    // Provide more specific error messages
+    if (error.response?.status === 401) {
+      res.status(401).json({ error: 'Invalid API Key' });
+    } else if (error.response?.status === 403) {
+      res.status(403).json({ error: 'Access denied. Check your permissions.' });
+    } else {
+      res.status(500).json({ error: 'Failed to fetch issues' });
+    }
   }
 });
 

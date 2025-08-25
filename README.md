@@ -4,7 +4,7 @@ A full-stack web application for interfacing with Jira Server, built to demonstr
 
 ## 🚀 Live Demo
 
-Visit the application at: [jira.tsn2222.lol](https://jira.tsn2222.lol) (Currently Under Development)
+Visit the application at: [jira.tsn2222.lol](https://jira.tsn2222.lol) _(Availability may vary; hosted on a local device)_
 
 ## 📋 Project Overview
 
@@ -12,13 +12,16 @@ This project demonstrates proficiency in full-stack development, containerizatio
 
 ### Learning Objectives
 
-- Full-stack JavaScript development
-- RESTful API design and implementation
-- React frontend development
-- Docker containerization
-- Nginx reverse proxy configuration
-- Raspberry Pi deployment
-- Environment-based configuration management
+- Node.js
+- Express.js
+- React.js
+- REST API
+- Axios
+- CORS
+- dotenv
+- Docker
+- Nginx (as a reverse proxy)
+- Raspberry Pi (for hosting)
 
 ## 🛠 Tech Stack
 
@@ -55,126 +58,19 @@ This project demonstrates proficiency in full-stack development, containerizatio
 │                 │    │                  │    │                 │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
          │                        │
-         └────────┬───────────────┘
-                  │
-         ┌─────────▼──────────┐
-         │                    │
-         │    Nginx Reverse   │
-         │   Proxy (Port 80)  │
-         │                    │
-         └────────────────────┘
-```
-
-## 🚦 Getting Started
-
-### Prerequisites
-
-- Node.js (v14 or higher)
-- npm or yarn
-- Jira Server instance
-- Jira Personal Access Token (PAT)
-
-### Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/yourusername/jira-dashboard.git
-   cd jira-dashboard
-   ```
-
-2. **Backend Setup**
-
-   ```bash
-   cd backend
-   npm install
-   ```
-
-3. **Environment Configuration**
-
-   Create a `.env` file in the backend directory:
-
-   ```env
-   JIRA_BASE_URL=https://your-jira-instance.com
-   JIRA_PAT=your_personal_access_token
-   PORT=3001
-   ```
-
-4. **Frontend Setup**
-   ```bash
-   cd ../frontend
-   npm install
-   ```
-
-### Development
-
-1. **Start the backend server**
-
-   ```bash
-   cd backend
-   npm start
-   ```
-
-2. **Start the frontend development server**
-
-   ```bash
-   cd frontend
-   npm start
-   ```
-
-3. **Access the application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:3001
-
-## 🐳 Docker Deployment
-
-### Building Images
-
-```bash
-# Build backend image
-docker build -t jira-backend ./backend
-
-# Build frontend image
-docker build -t jira-frontend ./frontend
-```
-
-### Running with Docker Compose
-
-```bash
-docker-compose up -d
-```
-
-## 🔧 API Endpoints
-
-### GET `/api/issues`
-
-Retrieves Jira issues for a specified user.
-
-**Parameters:**
-
-- `username` (query parameter) - Jira username to filter issues
-
-**Response:**
-
-```json
-{
-  "issues": [
-    {
-      "key": "PROJ-123",
-      "fields": {
-        "summary": "Issue title",
-        "status": { "name": "In Progress" },
-        "assignee": { "displayName": "John Doe" }
-      }
-    }
-  ]
-}
+         └───────────┬────────────┘
+                     │
+           ┌─────────▼──────────┐
+           │                    │
+           │    Nginx Reverse   │
+           │   Proxy (Port 80)  │
+           │                    │
+           └────────────────────┘
 ```
 
 ## 🔒 Security Considerations
 
 - Personal Access Tokens are stored in environment variables
-- CORS properly configured for cross-origin requests
 - Environment files excluded from version control
 - Bearer token authentication for Jira API requests
 
@@ -192,7 +88,6 @@ The application is containerized and deployed on a Raspberry Pi using:
 | Variable        | Description                    | Example                    |
 | --------------- | ------------------------------ | -------------------------- |
 | `JIRA_BASE_URL` | Base URL of your Jira instance | `https://jira.company.com` |
-| `JIRA_PAT`      | Personal Access Token for Jira | `Bearer token string`      |
 | `PORT`          | Backend server port            | `3001`                     |
 
 ## 🤝 Contributing
